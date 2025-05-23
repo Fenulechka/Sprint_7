@@ -13,7 +13,7 @@ def create_courier():
     }
 
     # Создаем курьера
-    creation_response = requests.post(Url.BASE_URL + Url.COURIER_CREATING_URL, json=payload)
+    requests.post(Url.BASE_URL + Url.COURIER_CREATING_URL, json=payload)
 
     # Получаем ID через ручку логина
     login_response = requests.post(

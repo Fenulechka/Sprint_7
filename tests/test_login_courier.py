@@ -26,11 +26,11 @@ class TestLoginCourier:
         ({"password": "65498"}, 400, "Недостаточно данных для входа"),
         ({"login": "test_user"}, 400, "Недостаточно данных для входа")
     ], ids=[
-        "недействительные логин и пароль",
-        "пустой логин",
-        "пустой пароль",
-        "отсутствует логин",
-        "отсутствует пароль"
+        "invalid_credentials",    # недействительные логин и пароль
+        "empty_login",           # пустой логин
+        "empty_password",        # пустой пароль
+        "missing_login",         # отсутствует логин
+        "missing_password"       # отсутствует пароль
     ])
     def test_login_courier_negative(self, login_data, expected_status_code, expected_message):
         with allure.step('Проверка негативных сценариев авторизации курьера'):

@@ -68,11 +68,11 @@ class TestCreatingCourier:
                 "Недостаточно данных для создания учетной записи"
         ),
     ], ids=[
-        "отсутствует логин",
-        "отсутствует пароль",
-        "отсутствует логин и пароль",
-        "пустой логин",
-        "пустой пароль"
+        "missing_login",          # отсутствует логин
+        "missing_password",       # отсутствует пароль
+        "missing_both_fields",    # отсутствует логин и пароль
+        "empty_login",            # пустой логин
+        "empty_password"          # пустой пароль
     ])
     def test_create_courier_negative(self, payload, expected_message):
         with allure.step('Негативные проверки создания курьера'):
