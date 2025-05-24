@@ -2,6 +2,7 @@ import allure
 import pytest
 import requests
 from urls import Url
+from data import negative_login_data, negative_login_test_names
 
 class TestLoginCourier:
     @allure.title('Авторизация курьера')
@@ -19,19 +20,7 @@ class TestLoginCourier:
             assert response.status_code == 200
             assert 'id' in response.json()
 
-    @pytest.mark.parametrize("login_data, expected_status_code, expected_message", [
-        ({"login": "nonexistent", "password": "wrongpassword"}, 404, "Учетная запись не найдена"),
-        ({"login": "", "password": "65498"}, 400, "Недостаточно данных для входа"),
-        ({"login": "test_user", "password": ""}, 400, "Недостаточно данных для входа"),
-        ({"password": "65498"}, 400, "Недостаточно данных для входа"),
-        ({"login": "test_user"}, 400, "Недостаточно данных для входа")
-    ], ids=[
-        "invalid_credentials",    # недействительные логин и пароль
-        "empty_login",           # пустой логин
-        "empty_password",        # пустой пароль
-        "missing_login",         # отсутствует логин
-        "missing_password"       # отсутствует пароль
-    ])
+    @pytest.mark.parametrize("login_data, expected_status_code, expected_message", negative_login_data, ids=negative_login_test_names)
     def test_login_courier_negative(self, login_data, expected_status_code, expected_message):
         with allure.step('Проверка негативных сценариев авторизации курьера'):
             # Авторизация курьера
